@@ -1,66 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baseball Stats and Odds</title>
-    <link rel="stylesheet" href="assets/style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baseball Stats and Odds</title>
+  <link rel="stylesheet" href="assets//css/style.css">
 </head>
+
 <body>
-    <div class="container">
-        <div class="logo-container">
-        <img class="logo" src="assets/image1.png" alt="MLB Logo">
+  <div class="container">
+    <div class="logo-container">
+      <img class="logo" src="assets/images/image1.png" alt="MLB Logo">
     </div>
-        <h1 class="page-title">Baseball Stats and Odds</h1>
-        <nav class="navigation">
-          <ul class="navigation-list">
-            <li class="navigation-item"><a href="#" onclick="showHomePage()">Home</a></li>
-            <li class="navigation-item"><a href="#" onclick="showStandings()">Standings</a></li>
-            <li class="navigation-item"><a href="#" onclick="showCalendar()">Calendar and Odds</a></li>
-          </ul>
-        </nav>
+    <h1 class="page-title">Baseball Stats and Odds</h1>
+    <nav class="navigation">
+      <ul class="navigation-list">
+        <li class="navigation-item"><a href="#" onclick="showHomePage()">Home</a></li>
+        <li class="navigation-item"><a href="#" onclick="showStandings()">Standings</a></li>
+        <li class="navigation-item"><a href="#" onclick="showCalendar()">Calendar and Odds</a></li>
+      </ul>
+    </nav>
 
-            <!-- home page content -->
-        <section id="home-section" class="content-section">
-            <h2>Home Page</h2>
-            <p>Welcome to the Baseball Stats and Odds website!</p>
-            <p>This site provides up-to-date baseball statistics and odds for fans and bettors alike.</p>
-        </section>
+    <!-- home page content -->
+    <section id="home-section" class="content-section">
+      <h2>Home Page</h2>
+      <p>Welcome to the Baseball Stats and Odds website!</p>
+      <p>This site provides up-to-date baseball statistics and odds for fans and bettors alike.</p>
+    </section>
 
-            <!-- standings page content -->
-          <section id="standings-section" class="content-section" style="display:none;">
-            <h2>Standings</h2>
-            <p>Here are the current standings for the 2023 MLB season:</p>
-          </section>
-
-             <!-- calendar and odds page content -->
-          <section id="calendar-section" class="content-section" style="display:none;">
-            <h2>Calendar and Odds</h2>
-            <p>Here is the upcoming schedule and odds for the next week of MLB games:</p>
-          </section>
-
+    <!-- standings page content -->
+    <section id="standings-section" class="content-section" style="display:none;">
+      <h2>Standings</h2>
+      <p>Please select your league to view the current standings for the 2023 MLB season:</p>
+      <div class="leagueSelection">
+        <button onclick="myFunction()" class="drop">Select League</button>
+        <div id="myDropdown" class="leagues">
+          <a href="#">American League</a>
+          <a href="#">National League</a>
+          <a href="#">AL East</a>
+          <a href="#">AL Central</a>
+          <a href="#">AL West</a>
+          <a href="#">NL East</a>
+          <a href="#">NL Central</a>
+          <a href="#">NL West</a>
+        </div>
       </div>
+    </section>
 
-      <script>
-        function showHomePage() {
-            document.getElementById('home-section').style.display = 'block';
-            document.getElementById('standings-section').style.display = 'none';
-            document.getElementById('calendar-section').style.display = 'none';
-    }
-    
-        function showStandings() {
-            document.getElementById('home-section').style.display = 'none';
-            document.getElementById('standings-section').style.display = 'block';
-            document.getElementById('calendar-section').style.display = 'none';
-    }
-    
-    function showCalendar() {
-            document.getElementById('home-section').style.display = 'none';
-            document.getElementById('standings-section').style.display = 'none';
-            document.getElementById('calendar-section').style.display = 'block';
-    }
-      </script>
+    <!-- calendar and odds page content -->
+    <section id="calendar-section" class="content-section" style="display:none;">
+      <h2>Calendar and Odds</h2>
+      <p>Please select your league to view schedule and odds for the next week of MLB games:</p>
+      <div class="leagueSelection">
+        <button onclick="myFunction()" class="drop">Select League</button>
+        <div id="myDropdown" class="leagues">
+          <a href="#">American League</a>
+          <a href="#">National League</a>
+          <a href="#">AL East</a>
+          <a href="#">AL Central</a>
+          <a href="#">AL West</a>
+          <a href="#">NL East</a>
+          <a href="#">NL Central</a>
+          <a href="#">NL West</a>
+        </div>
+      </div>
+    </section>
 
+  </div>
+
+  <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
