@@ -15,10 +15,17 @@
     const apiKeyStats = "9f7bab9a2e3d8137fcf83af0c6652b78d74c0";
     const apiKeyOdds =  "ad465671e8ad54919c6f069154537fce";
 
+    // Display dropwdown menu in Standings
     function myFunction() {
         document.getElementById('myDropdown').classList.toggle('show');
     }
+
+    // Display dropwdown menu in Odds
+    function myFunction1() {
+        document.getElementById('myDropdown1').classList.toggle('show');
+    }
     
+    // Hides dropdown when clicking outside the button
     window.onclick = function (event) {
         if (event.target && !event.target.classList.contains('drop')) {
             let dropdown = document.getElementsByClassName('leagues');
