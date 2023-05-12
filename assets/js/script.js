@@ -110,6 +110,8 @@ function showCalendar() {
     if (searchHistory.length > 0) {
         getStats(searchHistory[searchHistory.length - 1]);
     }
+
+    
 // });
 
 
