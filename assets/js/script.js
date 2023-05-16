@@ -57,54 +57,83 @@ function showCalendar() {
     document.getElementById('calendar-section').style.display = 'block';
 }
 
-const options = {
-    method: 'GET',
-    url: 'https://api-baseball.p.rapidapi.com/teams',
-    params: {
-        league: '1',
-        season: '2020'
-    },
-    headers: {
-        'X-RapidAPI-Key': '1758fda19dmshcb7e9f9e8e12fecp187acejsn16d775cbbb61',
-        'X-RapidAPI-Host': 'api-baseball.p.rapidapi.com'
-    }
-};
+// const options = {
+//     method: 'GET',
+//     url: 'https://api-baseball.p.rapidapi.com/teams',
+//     params: {
+//         league: '1',
+//         season: '2020'
+//     },
+//     headers: {
+//         'X-RapidAPI-Key': '1758fda19dmshcb7e9f9e8e12fecp187acejsn16d775cbbb61',
+//         'X-RapidAPI-Host': 'api-baseball.p.rapidapi.com'
+//     }
+// };
 async function getTeams() {
-    try {
-        const response = await request(options);
-        if (!response.ok) {
-            throw new Error(`Getting error: ${response}`);
-        }
-        return response.JSON();
-        // console.log(response.data);
-    } catch (error) {
-        console.error(error);
-    }
+    // const url = 'https://v1.baseball.api-sports.io/standings?name='+ teamName;
+    let requestOptions = {
+        method: 'GET',
+        headers: {
+            "x-rapidapi-key": "103b532ccbd16cb029fe4d58e363b2d6",
+            "x-rapidapi-host": "v1.baseball.api-sports.io",
+        },
+        redirect: 'follow'
+    };
+    fetch("https://v1.baseball.api-sports.io/standings?season=2021&league=1", requestOptions)
+        .then(response => response.text())
+        .then(async result => {
+            console.log(result)
+            const data = await result.JSON;
+            nameEl.innerHTML = "League: " + result.data;
+            // searchSeasonEl.innerHTML = "Season: " + result.data.season;
+            // leagueEl.innerHTML = data.league="";
+        })
+        .catch(error => console.error('error', error));
 }
 
-// function getStats(teamName) {
-//     let queryURL = "https://api-baseball.p.rapidapi.com/timezone" + teamName + "&appid=" + apiKeyStats;
-//     axios.get(queryURL)
-//         .then(function (response) {
-//             currentStatsEl.classList.remove("");
-//             // Parse response to display current weather
-//             const currentDate = new Date(response.data.dt * 1000);
-//             const day = currentDate.getDate();
-//             const month = currentDate.getMonth() + 1;
-//             const year = currentDate.getFullYear();
-//             nameEl.innerHTML = response.data.team.name + " (" + month + "/" + day + "/" + year + ") ";
-//             let teamPic = response.data.team[0].icon;
-//             currentPicEl.setAttribute("src", "https://api-baseball.p.rapidapi.com/standings?league=1&season=2023" + teamPic + "@2x.png");
-//             currentPicEl.setAttribute("alt", response.data.team[0].description);
-//             standingsEl = "Standings" + response.data.standings.name;
-//             currentPositionEl.innerHTML = "Position " + response.data.position.name;
-//             currentGamesEl.innerHTML = "Games: " + response.data.games.played + "played";
-//             currentPointsEl.innerHTML = "Points: " + response.data.wind.speed + "points";
-//             leagueEl.innerHTML = "League: " + response.data.league.name + "points";
-//         })
-// }
+function getStats() {
+    let requestOptions = {
+        method: 'GET',
+        headers: {
+            "x-rapidapi-key": "103b532ccbd16cb029fe4d58e363b2d6",
+            "x-rapidapi-host": "v1.baseball.api-sports.io",
+        },
+        redirect: 'follow'
+    };
+    fetch("https://v1.baseball.api-sports.io/standings?season=2023&league=1&team=1", requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('#standings-table tbody');
+            data.forEach(item => {
+                const row = document.createElement('tr');
+
+                const teamCell = document.createElement('td');
+                teamCell.textContent = item.Team;
+                row.appendChild(teamCell);
+
+                const gamesCell = document.createElement('td');
+                gamesCell.textContent = item.games;
+                row.appendChild(gamesCell);
+
+                const winsCell = document.createElement('td');
+                winsCell.textContent = item.wins;
+                row.appendChild(winsCell);
+
+                const lossCell = document.createElement('td');
+                lossCell.textContent = item.loss;
+                row.appendChild(lossCell);
+
+                tableBody.appendChild(row);
+            });
+        })
+        // .catch(error => console.error('Error:', error));
+}
+
+const alStanding = document.querySelector('#AL');
+alStanding.addEventListener('click', getStats());
+
 // Get history from local storage if any
-searchEl.addEventListener("click", function() {
+searchEl.addEventListener("click", function () {
     const searchTeam = teamEl.value;
     getTeams(searchTeam);
     searchHistory.push(searchTeam);
