@@ -23,9 +23,14 @@ body {
     font-size: 3rem;
     text-align: center;
     margin-bottom: 30px;
-    background-color: #002d72;
+    background-image: linear-gradient(to right, #002d72, #2068e1);
     color: white;
     padding: 10px;
+    font-family: 'Arial Black', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
 }
 
 .navigation {
@@ -69,6 +74,30 @@ body {
     margin-bottom: 20px;
     text-align: center;
 }
+
+#standings-table {
+    margin: 0 auto;
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  tbody tr:hover {
+    background-color: #e2e2e2;
+  }
+  
 
 .drop {
     background-color: #002d72;
