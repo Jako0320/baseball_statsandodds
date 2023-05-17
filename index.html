@@ -69,47 +69,65 @@
     <section id="calendar-section" class="content-section" style="display:none;">
       <h2>Calendar and Odds</h2>
       <p>Please select your league to view schedule and odds for the next week of MLB games:</p>
-      <div class="leagueSelection">
-        <button onclick="myFunction1()" class="drop">Select League</button>
-        <div id="myDropdown1" class="leagues">
-          <a href="#">American League</a>
-          <a href="#">National League</a>
-          <a href="#">AL East</a>
-          <a href="#">AL Central</a>
-          <a href="#">AL West</a>
-          <a href="#">NL East</a>
-          <a href="#">NL Central</a>
-          <a href="#">NL West</a>
+      <nav id="oddNav">
+        <div class="leagueSelection">
+          <button onclick="myFunction1()" class="drop">Select League</button>
+          <div id="myDropdown1" class="leagues">
+            <a id="AL_Cal" href="#">American League</a>
+            <a id="NL_Cal" href="#">National League</a>
+            <a id="ALE_Cal" href="#">AL East</a>
+            <a id="ALC_Cal" href="#">AL Central</a>
+            <a id="ALW_Cal" href="#">AL West</a>
+            <a id="NLE_Cal" href="#">NL East</a>
+            <a id="NLC_Cal" href="#">NL Central</a>
+            <a id="NLW_Cal" href="#">NL West</a>
+          </div>
         </div>
-      </div>
+
+        <div class="col-lg-3" id="aside">
+          <div class="input-group mb-3">
+            <input id="enter-team" type="text" class="form-control" placeholder="Team Search" aria-label="Enter a Team">
+          </div>
+          <div class="input-group-append">
+            <button id="search-button" class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-primary mb-3" type="button" id="clear-history">Clear history</button>
+          </div>
+          
+          <form id="history">Search History</form>
+        </div>
+
+        <!-- <div class="col-lg-9">
+          <div class="row mr-0">
+            <div class="col-lg-11 card m-3 mlb-1" id="mlb-season">
+              <div class="card-body">
+                <h3 id="team-name" class="team-name align-middle"></h3>
+                <img id="current-pic" alt="">
+                <p id="league"></p>
+                <p id="season"></p>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </nav>
+      <!-- Calendar Table -->
+      <table id="calendar-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Away Team</th>
+            <th>Away Team Price</th>
+            <th>Home Team Price</th>
+            <th>Home Team</th>
+
+          </tr>
+        </thead>
+        <tbody id="calendar-table-body">
+        </tbody>
+      </table>
     </section>
-
   </div>
 
-  <div class="col-lg-3" id="aside">
-    <div class="input-group mb-3">
-      <input id="enter-team" type="text" class="form-control" placeholder="Team Search" aria-label="Enter a Team">
-    </div>
-    <div class="input-group-append">
-      <button id="search-button" class="btn btn-outline-success" type="submit">Search</button>
-    </div>
-    <button class="btn btn-primary mb-3" type="button" id="clear-history">Clear history</button>
-    <h3>Search History</h3>
-    <form id="history"></form>
-  </div>
 
-  <div class="col-lg-9">
-    <div class="row mr-0">
-      <div class="col-lg-11 card m-3 mlb-1" id="mlb-season">
-        <div class="card-body">
-          <h3 id="team-name" class="team-name align-middle"></h3>
-          <!-- <img id="current-pic" alt=""> -->
-          <p id="league"></p>
-          <p id="season"></p>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
