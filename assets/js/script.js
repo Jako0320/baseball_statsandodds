@@ -110,6 +110,7 @@ function getStats(league) {
 
                 const logoCell = document.createElement('img');
                 logoCell.src = item.team.logo;
+                logoCell.classList.add('logo-image');
                 row.appendChild(logoCell)
 
                 const teamCell = document.createElement('td');
