@@ -91,7 +91,7 @@ async function getTeams() {
         .catch(error => console.error('error', error));
 }
 
-function getStats() {
+function getStats(league) {
     let requestOptions = {
         method: 'GET',
         headers: {
@@ -100,37 +100,83 @@ function getStats() {
         },
         redirect: 'follow'
     };
-    fetch("https://v1.baseball.api-sports.io/standings?season=2023&league=1&team=1", requestOptions)
+    
+    fetch("https://v1.baseball.api-sports.io/standings?season=2023&league=1", requestOptions)
         .then(response => response.json())
         .then(data => {
             const tableBody = document.querySelector('#standings-table tbody');
-            data.forEach(item => {
+            tableBody.innerHTML = '';
+
+            let chosenLeague = data.response.flatMap(teamArray => teamArray.filter(team => team.group.name === league))
+
+            chosenLeague.forEach(item => {
                 const row = document.createElement('tr');
 
+                const logoCell = document.createElement('img');
+                logoCell.src = item.team.logo;
+                row.appendChild(logoCell)
+
                 const teamCell = document.createElement('td');
-                teamCell.textContent = item.Team;
+                teamCell.textContent = item.team.name;
                 row.appendChild(teamCell);
 
                 const gamesCell = document.createElement('td');
-                gamesCell.textContent = item.games;
+                gamesCell.textContent = item.games.played;
                 row.appendChild(gamesCell);
 
                 const winsCell = document.createElement('td');
-                winsCell.textContent = item.wins;
+                winsCell.textContent = item.games.win.total;
                 row.appendChild(winsCell);
 
                 const lossCell = document.createElement('td');
-                lossCell.textContent = item.loss;
+                lossCell.textContent = item.games.lose.total;
                 row.appendChild(lossCell);
 
                 tableBody.appendChild(row);
             });
         })
-        // .catch(error => console.error('Error:', error));
+    // .catch(error => console.error('Error:', error));
 }
 
-const alStanding = document.querySelector('#AL');
-alStanding.addEventListener('click', getStats());
+const alStanding = document.getElementById('AL');
+alStanding.addEventListener('click', (event) => {
+    getStats(event.target.innerText)
+});
+
+const nlStanding = document.getElementById('NL');
+nlStanding.addEventListener('click', (event) => {
+    getStats(event.target.innerText)
+});
+
+const nlEStanding = document.getElementById('NL_E');
+nlEStanding.addEventListener('click', (event) => {
+    getStats(event.target.innerText)
+});
+
+const nlCStanding = document.getElementById('NL_C');
+nlCStanding.addEventListener('click', (event) => {
+    getStats(event.target.innerText)
+});
+
+const nlWStanding = document.getElementById('NL_W');
+nlWStanding.addEventListener('click', (event) => {
+    getStats(event.target.innerText)
+});
+
+const alEStanding = document.getElementById('AL_E');
+alEStanding.addEventListener('click', (event) => {
+    getStats(event.target.innerText)
+});
+
+const alCStanding = document.getElementById('AL_C');
+alCStanding.addEventListener('click', (event) => {
+    getStats(event.target.innerText)
+});
+
+const alWStanding = document.getElementById('AL_W');
+alWStanding.addEventListener('click', (event) => {
+    getStats(event.target.innerText)
+});
 
 // Get history from local storage if any
 searchEl.addEventListener("click", function () {
