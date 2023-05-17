@@ -81,6 +81,10 @@ body {
     font-size: 20px;
 }
 
+.logo-image {
+    width: 60px; 
+  }
+  
 #calendar-table {
     margin: 0 auto;
     width: 100%;
