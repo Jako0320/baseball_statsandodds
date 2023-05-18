@@ -7,9 +7,6 @@ This baseball webpage, provides users the opportunity to check current stats and
 * Timely commits to GitHub repository to save work
 * Deployed webpage
 
-It displays on one page the standings for a division specified from a dropdown menu using a sports API, on another the upcoming games and odds in a specific division using an Odds 
-API as well as the upcoming games for a specific team defined in a search bar, which also stores the previous searches in local memory.
-
 # Your Task
 Working on this API fueled baseball webpage, provided us with the opportunity to not only get more experience with eventListeners, jquery, but also gain an abundance of knowledge, in the usage and coding to add and use APIs from open source websites.
 
@@ -27,7 +24,7 @@ An API from <a href="https://dashboard.api-football.com/">dashboard.api-football
 An API from <a href="https://rapidapi.com/theoddsapi/api/live-sports-odds/">
 
 # Usage
-The baseball odds and stats webpage allows users to check the stats and odds of teams and games.
+The baseball odds and stats webpage allows users to check on one page the standings for a division specified from a dropdown menu, and on another the upcoming games and odds in a specific division, as well as the upcoming games for a specific team defined in a search bar, which also stores the previous searches in local memory.
 
 # Credits
 * Jacques Scoffoni (Developer)
