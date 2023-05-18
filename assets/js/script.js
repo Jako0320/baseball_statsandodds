@@ -12,7 +12,7 @@ const leagueEl = document.getElementById("league");
 const historyEl = document.getElementById("history");
 let currentStatsEl = document.getElementById("current-stats");
 let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
-const apiKeyStats = "103b532ccbd16cb029fe4d58e363b2d6";
+const apiKeyStats = "b9a2e3d8137fcf83af0c6652b78d74c0";
 const apiKeyOdds = "ad465671e8ad54919c6f069154537fce";
 const alTeams = ["Los Angeles Angels", "Boston Red Sox", "Houston Astros", "Toronto Blue Jays", "Baltimore Orioles", "Tampa Bay Rays", "Cleveland Guardians", "Minnesota Twins", "Texas Rangers", "Detroit Tigers", "Oakland Athletics", "Chicago White Sox", "Kansas City Royals", "Seattle Mariners", "New York Yankees"];
 const nlTeams = ["Los Angeles Dodgers", "Atlanta Braves", "New York Mets", "Philadelphia Phillies", "St. Louis Cardinals", "Chicago Cubs", "Milwaukee Brewers", "Washington Nationals", "Pittsburgh Pirates", "Miami Marlins", "San Francisco Giants", "Cincinnati Reds", "Arizona Diamondbacks", "Colorado Rockies", "San Diego Padres"];
@@ -65,27 +65,56 @@ function showCalendar() {
     document.getElementById('calendar-section').style.display = 'block';
 }
 
-async function getTeams() {
-    // const url = 'https://v1.baseball.api-sports.io/standings?name='+ teamName;
-    let requestOptions = {
+async function getTeams(searchTerm) {
+    const url = 'https://odds.p.rapidapi.com/v4/sports/baseball_mlb/odds?regions=us&oddsFormat=decimal&markets=h2h&dateFormat=iso&sport=baseball_mlb';
+    const options = {
         method: 'GET',
         headers: {
-            "x-rapidapi-key": apiKeyStats,
-            "x-rapidapi-host": "v1.baseball.api-sports.io",
-        },
-        redirect: 'follow'
+            'X-RapidAPI-Key': 'a66bd56646msh8af3d6a2a3f42d2p1eeefcjsndd2951cb69f8',
+            'X-RapidAPI-Host': 'odds.p.rapidapi.com'
+        }
     };
-    fetch("https://v1.baseball.api-sports.io/standings?season=2021&league=1", requestOptions)
-        .then(response => response.text())
-        .then(async result => {
-            console.log(result)
-            const data = await result.JSON;
-            nameEl.innerHTML = "League: " + result.data;
-            // searchSeasonEl.innerHTML = "Season: " + result.data.season;
-            // leagueEl.innerHTML = data.league="";
+
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        let calTGames = result.filter(game => game.away_team.includes(searchTerm) || game.home_team.includes(searchTerm));
+
+        const tableBody = document.querySelector('#calendar-table tbody');
+        tableBody.innerHTML = '';
+
+        calTGames.forEach(item => {
+            const row = document.createElement('tr');
+
+            const dateCell = document.createElement('td');
+            dateCell.textContent = item.commence_time;
+            row.appendChild(dateCell);
+
+            const awayTCell = document.createElement('td');
+            awayTCell.textContent = item.away_team;
+            row.appendChild(awayTCell);
+
+            const awayPCell = document.createElement('td');
+            awayPCell.textContent = item.bookmakers[0].markets[0].outcomes[0].price;
+            row.appendChild(awayPCell);
+
+            const homePCell = document.createElement('td');
+            homePCell.textContent = item.bookmakers[0].markets[0].outcomes[1].price;
+            row.appendChild(homePCell);
+
+            const homeTCell = document.createElement('td');
+            homeTCell.textContent = item.home_team;
+            row.appendChild(homeTCell);
+
+            tableBody.appendChild(row);
         })
-        .catch(error => console.error('error', error));
+
+    }
+    catch (error) {
+        console.error(error);
+    }
 }
+
 
 function getStats(league) {
     let requestOptions = {
@@ -286,12 +315,12 @@ function renderSearchHistory() {
     const storedSearchHistory = JSON.parse(localStorage.getItem("team-search"));
 
     if (storedSearchHistory && storedSearchHistory.length > 0) {
-        for (let i = 0; i < searchHistory.length; i++) {
+        for (let i = 0; i < storedSearchHistory.length; i++) {
             const historyItem = document.createElement("input");
             historyItem.setAttribute("type", "text");
             historyItem.setAttribute("readonly", true);
             historyItem.setAttribute("class", "form-control d-block bg-white");
-            historyItem.setAttribute("value", searchHistory[i]);
+            historyItem.setAttribute("value", storedSearchHistory[i]);
             historyItem.addEventListener("click", function () {
                 getTeams(historyItem.value);
             });
@@ -305,5 +334,6 @@ function renderSearchHistory() {
 }
 renderSearchHistory();
 if (searchHistory.length > 0) {
-    getTeams(searchHistory[searchHistory.length - 1]);
+    getTeams(searchTem);
 }
+window.addEventListener("DOMContentLoaded", renderSearchHistory);
