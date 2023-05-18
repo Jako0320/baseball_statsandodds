@@ -13,7 +13,7 @@ const historyEl = document.getElementById("history");
 let currentStatsEl = document.getElementById("current-stats");
 let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 const apiKeyStats = "b9a2e3d8137fcf83af0c6652b78d74c0";
-const apiKeyOdds = "ad465671e8ad54919c6f069154537fce";
+const apiKeyOdds = "a66bd56646msh8af3d6a2a3f42d2p1eeefcjsndd2951cb69f8";
 const alTeams = ["Los Angeles Angels", "Boston Red Sox", "Houston Astros", "Toronto Blue Jays", "Baltimore Orioles", "Tampa Bay Rays", "Cleveland Guardians", "Minnesota Twins", "Texas Rangers", "Detroit Tigers", "Oakland Athletics", "Chicago White Sox", "Kansas City Royals", "Seattle Mariners", "New York Yankees"];
 const nlTeams = ["Los Angeles Dodgers", "Atlanta Braves", "New York Mets", "Philadelphia Phillies", "St. Louis Cardinals", "Chicago Cubs", "Milwaukee Brewers", "Washington Nationals", "Pittsburgh Pirates", "Miami Marlins", "San Francisco Giants", "Cincinnati Reds", "Arizona Diamondbacks", "Colorado Rockies", "San Diego Padres"];
 const nlETeams = ["Atlanta Braves", "Washington Nationals", "Philadelphia Phillies", "New York Mets", "Miami Marlins"];
@@ -70,7 +70,7 @@ async function getTeams(searchTerm) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'a66bd56646msh8af3d6a2a3f42d2p1eeefcjsndd2951cb69f8',
+            'X-RapidAPI-Key': apiKeyOdds,
             'X-RapidAPI-Host': 'odds.p.rapidapi.com'
         }
     };
@@ -210,7 +210,7 @@ async function getOdds(league) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'a66bd56646msh8af3d6a2a3f42d2p1eeefcjsndd2951cb69f8',
+            'X-RapidAPI-Key': apiKeyOdds,
             'X-RapidAPI-Host': 'odds.p.rapidapi.com'
         }
     };
